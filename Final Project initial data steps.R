@@ -37,6 +37,17 @@ final_subset=final %>%
               ))
 
 
+###Long form data
 #RISKY BEHAVIOR - OUTCOME
+l.final= final_subset %>% 
+  pivot_longer(., cols=c("TA111126","TA131218","TA151278", "TA171976","TA192157"), values_to = "risk_behav") %>%
+   mutate(time = case_when( #time=wave
+    name == "TA111126" ~ 1,
+    name == "TA131218" ~ 2,
+    name == "TA151278" ~ 3,
+    name == "TA171976" ~ 4,
+    name == "TA192157" ~ 5
+  )) 
 
+View(l.final)
 ```
