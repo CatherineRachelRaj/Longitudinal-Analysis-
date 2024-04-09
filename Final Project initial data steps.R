@@ -38,7 +38,5 @@ final_subset=final %>%
 
 
 #RISKY BEHAVIOR - OUTCOME
-final %>% 
-  pivot_longer(., cols=c("TA111126","TA131218","TA151278", "TA171976","TA192157"), values_to = "risk_behav") %>%
-  mutate()
+
 ```
