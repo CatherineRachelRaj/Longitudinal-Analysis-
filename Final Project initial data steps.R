@@ -52,11 +52,11 @@ l.final= final_subset %>%
   pivot_longer(., cols= c("TA111056","TA131091","TA151131","TA171960", "TA192136"), values_to = "hispanic", names_to = "hisp_col") %>%
   pivot_longer(., cols= c("TA111057","TA131092","TA151132","TA171955", "TA192131"), values_to = "race", names_to = "rac_col") %>%
    mutate(time = case_when( #time=wave
-    name == "TA111126" ~ 1,
-    name == "TA131218" ~ 2,
-    name == "TA151278" ~ 3,
-    name == "TA171976" ~ 4,
-    name == "TA192157" ~ 5
+    risk_col == "TA111126" ~ 1,
+    risk_col == "TA131218" ~ 2,
+    risk_col == "TA151278" ~ 3,
+    risk_col == "TA171976" ~ 4,
+    risk_col == "TA192157" ~ 5
   )) 
 
 View(l.final)
