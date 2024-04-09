@@ -25,7 +25,7 @@ final=read_dta("finalproj_2023.dta")
 #subsetting variables: race, risky behaviors, peer drug use, substances - cocaine, amphetamine, marijuana, steroids, barbiturates, tranquilizers
 final_subset=final %>% 
   select(., c("PID","TA111126","TA131218","TA151278", "TA171976","TA192157", #risky behavior
-              "TA111056","TA111057", "TA131091","TA131092", "TA151131","TA151132","TA171955","TA171960","TA192131","TA192136", #race
+              "TA111056","TA111057", "TA131091","TA131092", "TA151131","TA151132","TA171955","TA171960","TA192131","TA192136", #race and ethnicity
               "TA111020","TA131055","TA151095","TA171928","TA192089", #peer drug use
               "TA110940","TA130973", "TA150995","TA171836","TA191998", #cocaine
               "TA110924","TA130957","TA150979","TA171862","TA192024", #amphetamines
