@@ -196,5 +196,8 @@ for (i in 1:5) {
   freq[[i]] <- lapply(data_time, fr_pr)
 }  
 freq[[1]] #at wave=1
-
+freq[[2]] #for wave=2
+freq[[3]] #for wave=3
+freq[[4]] #for wave=4
+freq[[5]] #for wave 5
 ```
