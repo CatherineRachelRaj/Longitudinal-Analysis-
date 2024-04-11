@@ -58,18 +58,27 @@ l.final$peer_drug_use=peer
 cocaine= final_subset%>%
   pivot_longer(., cols= c("TA110940","TA130973", "TA150995","TA171836","TA191998"), values_to = "cocaine", names_to = "coc_col") %>%
   pull(cocaine)
-l.final$cocaine = cocaine
+#recoded to 1= has tried, 0= not tried, NA
+cocaine_C=ifelse(cocaine==1,1, 
+               ifelse(cocaine %in% c(0,5),0,NA))
+l.final$cocaine = cocaine_C
 
 amphetamines= final_subset %>%
   pivot_longer(., cols= c("TA110924","TA130957","TA150979","TA171862","TA192024"), values_to = "amphetamines", names_to = "amp_col") %>%
   pull(amphetamines)
-l.final$amphetamines=amphetamines
+#recoded to 1= has tried, 0= not tried, NA
+amphetamines_C=ifelse(amphetamines==1,1,
+                      ifelse(amphetamines %in% c(0,5),0,NA))
+l.final$amphetamines=amphetamines_C
 
 
 marijuana=final_subset %>%  
   pivot_longer(., cols= c("TA110932","TA130965", "TA150987", "TA171828", "TA191990"), values_to = "marijuana", names_to = "marj_col") %>%
   pull(marijuana)
-l.final$marijuana=marijuana
+#recoded to 1= has tried, 0= not tried, NA
+marijuana_C=ifelse(marijuana==1,1,
+                      ifelse(marijuana %in% c(0,5),0,NA))
+l.final$marijuana=marijuana_C
 
 marijuana_freq= final_subset %>%
   pivot_longer(., cols= c("TA110936", "TA130969","TA150991", "TA171832", "TA191994"), values_to = "marijuana_freq", names_to = "marjf_col") %>%
@@ -79,17 +88,35 @@ l.final$marijuana_freq=marijuana_freq
 steroids= final_subset %>%
   pivot_longer(., cols= c("TA110961", "TA130994","TA151016","TA171870", "TA192032"), values_to = "steroids", names_to = "ster_col") %>%
   pull(steroids)
-l.final$steroids=steroids
+#recoded to 1= has tried, 0= not tried, NA
+steroids_C=ifelse(steroids==1,1,
+                      ifelse(steroids %in% c(0,5),0,NA))
+l.final$steroids=steroids_C
 
 barbiturates= final_subset %>%
   pivot_longer(., cols= c("TA110945", "TA130978", "TA151000","TA171878", "TA192040"), values_to = "barbiturates", names_to = "barb_col") %>%
   pull(barbiturates)
-l.final$barbiturates = barbiturates
+#recoded to 1= has tried, 0= not tried, NA
+barbiturates_C=ifelse(barbiturates==1,1,
+                      ifelse(barbiturates%in% c(0,5),0,NA))
+l.final$barbiturates=barbiturates_C
 
 tranquilizers= final_subset %>%
   pivot_longer(., cols= c("TA110953", "TA130986", "TA151008", "TA171886", "TA192048"), values_to = "tranquilizers", names_to = "tranq_col") %>%
   pull(tranquilizers)
-l.final$tranquilizers=tranquilizers
+#recoded to 1= has tried, 0= not tried, NA
+tranquilizers_C=ifelse(tranquilizers==1,1,
+                      ifelse(tranquilizers %in% c(0,5),0,NA))
+l.final$tranquilizers=tranquilizers_C
+
+#no.of substances used
+no_sub=l.final %>% select(., c("cocaine","amphetamines","marijuana","steroids","barbiturates","tranquilizers")) %>% mutate(no_sub=rowSums(., na.rm=F))
+#multi-drug user: if no_sub >1 TRUE, if no_sub<=1 F, NA
+no_sub$multiple=ifelse(no_sub$no_sub>1,T,
+                       ifelse(no_sub$no_sub<=1,F,NA))
+l.final$no_sub= no_sub$no_sub
+l.final$multiple= no_sub$multiple
+
 
 ###RACE_ETHNIC variable 
 ##since the codebook for few waves are different for race, the variables are combined by individual wave
@@ -152,5 +179,19 @@ race=race_ethnic$race_ethnic
 l.final$race=race
 View(l.final)
 
+
+
+###univariate analysis
+freq=list()
+for (i in 1:5) {
+  data_time <- l.final %>% filter(time == i) %>% select(., -PID)
+  fr_pr=function(x){
+    a=table(x, useNA = "always")
+    b=round(prop.table(table(x, useNA="always")) * 100,2)
+    return(data.frame(n=a, perc=b))
+  }
+  freq[[i]] <- lapply(data_time, fr_pr)
+}  
+freq[[1]] #at wave=1
 
 ```
