@@ -112,6 +112,7 @@ tranquilizers_C=ifelse(tranquilizers==1,1,
                       ifelse(tranquilizers %in% c(0,5),0,NA))
 l.final$tranquilizers=tranquilizers_C
 
+##NEW VARIABLES
 #no.of substances used
 no_sub=l.final %>% select(., c("cocaine","amphetamines","marijuana","steroids","barbiturates","tranquilizers")) %>% mutate(no_sub=rowSums(., na.rm=F))
 #multi-drug user: if no_sub >1 TRUE, if no_sub<=1 F, NA
