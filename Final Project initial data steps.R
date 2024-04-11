@@ -53,7 +53,7 @@ l.final= final_subset %>%
   
 peer= final_subset %>% pivot_longer(., cols= c("TA111020","TA131055","TA151095","TA171928","TA192089"), values_to = "peer_drug_use", names_to = "peer_col") %>% 
   pull(peer_drug_use)
-peer[peer %in% c(8,9)]=NA
+peer[peer %in% c(8,9)]=NA #8=DK, 9=NA/refused so recoded to NA
 l.final$peer_drug_use=peer
 
 
@@ -85,7 +85,7 @@ l.final$marijuana=marijuana_C
 marijuana_freq= final_subset %>%
   pivot_longer(., cols= c("TA110936", "TA130969","TA150991", "TA171832", "TA191994"), values_to = "marijuana_freq", names_to = "marjf_col") %>%
   pull(marijuana_freq)
-marijuana_freq[marijuana_freq %in% c(8,9)]=NA
+marijuana_freq[marijuana_freq %in% c(8,9)]=NA #8=DK, 9=NA/refused so recoded to NA
 l.final$marijuana_freq=marijuana_freq
 
 steroids= final_subset %>%
