@@ -181,9 +181,9 @@ race_ethnic=rac %>%
 race=race_ethnic$race_ethnic
 l.final$race=race
 View(l.final)
+```
 
-
-
+```{r univariate analysis} 
 ###univariate analysis
 freq=list()
 for (i in 1:5) {
