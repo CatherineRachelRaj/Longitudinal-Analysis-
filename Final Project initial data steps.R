@@ -33,7 +33,8 @@ final_subset=final %>%
               "TA110936", "TA130969","TA150991", "TA171832", "TA191994", #marijuana freq
               "TA110961", "TA130994","TA151016","TA171870", "TA192032", #steroids
               "TA110945", "TA130978", "TA151000","TA171878", "TA192040", #barbiturates
-              "TA110953", "TA130986", "TA151008", "TA171886", "TA192048" #tranquilizers
+              "TA110953", "TA130986", "TA151008", "TA171886", "TA192048", #tranquilizers
+              "TA111130", "TA131222", "TA151282", "TA171977", "TA192156" #everday discrimination
               )) 
 
 
@@ -111,6 +112,15 @@ tranquilizers= final_subset %>%
 tranquilizers_C=ifelse(tranquilizers==1,1,
                       ifelse(tranquilizers %in% c(0,5),0,NA))
 l.final$tranquilizers=tranquilizers_C
+
+
+discrimination = final_subset %>%
+  pivot_longer(., cols = c("TA111130", "TA131222", "TA151282", "TA171977", "TA192156"), 
+               values_to = "discrimination", names_to = "discrimination_col") %>%
+  pull(discrimination)
+
+l.final$discrimination <- discrimination
+
 
 ##NEW VARIABLES
 #no.of substances used
