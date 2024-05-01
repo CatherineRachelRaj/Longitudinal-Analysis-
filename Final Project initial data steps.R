@@ -118,8 +118,10 @@ discrimination = final_subset %>%
   pivot_longer(., cols = c("TA111130", "TA131222", "TA151282", "TA171977", "TA192156"), 
                values_to = "discrimination", names_to = "discrimination_col") %>%
   pull(discrimination)
-
-l.final$discrimination <- discrimination
+#recoded to 9=NA
+discrimination_C = discrimination
+discrimination_C[discrimination_C==9]=NA
+l.final$discrimination= discrimination_C
 
 
 ##NEW VARIABLES
