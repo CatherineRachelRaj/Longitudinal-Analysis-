@@ -1,4 +1,7 @@
-```{r}
+```{r library}
+library(lme4)
+```
+```{r unconditional models}
 #unconditional mean model
 uc.mean=lmer(risk_behav ~ 1 + (1 |PID), data = l.filtered,REML = FALSE)
 summary(uc.mean)
