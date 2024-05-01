@@ -215,6 +215,7 @@ freq[[4]] #for wave=4
 freq[[5]] #for wave 5
 
 ###exclusion of participants without atleast two collected data points for any of the columns 
+# no.of participants after exclusion = 2925
 l.filtered = l.final %>% 
               group_by(PID) %>%
               filter(sum(!is.na(risk_behav)) >= 2 
