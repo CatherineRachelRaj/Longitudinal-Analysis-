@@ -1,3 +1,52 @@
+##a. descriptive
+```{r}
+l.filtered$time <- as.factor(l.filtered$time)
+l.filtered$risk_behav <- as.factor(l.filtered$risk_behav)
+l.filtered$peer_drug_use <- as.factor(l.filtered$peer_drug_use)
+l.filtered$discrimination <- as.factor(l.filtered$discrimination)
+l.filtered$multiple <- as.factor(l.filtered$multiple)
+l.filtered %>%
+  select(-PID)
+demo_table1 <- l.filtered %>%
+  filter(time == 1) %>%
+  select(Age, race, risk_behav, peer_drug_use, discrimination, multiple) %>%
+  tbl_summary() %>%
+  bold_labels()
+demo_table2 <- l.filtered %>%
+  filter(time == 2) %>%
+  select(Age, race, risk_behav, peer_drug_use, discrimination, multiple) %>%
+  tbl_summary() %>%
+  bold_labels()
+demo_table3 <- l.filtered %>%
+  filter(time == 3) %>%
+  select(Age, race, rcisk_behav, peer_drug_use, discrimination, multiple) %>%
+  tbl_summary() %>%
+  bold_labels()
+demo_table4 <- l.filtered %>%
+  filter(time == 4) %>%
+  select(Age, race, risk_behav, peer_drug_use, discrimination, multiple) %>%
+  tbl_summary() %>%
+  bold_labels()
+demo_table5 <- l.filtered %>%
+  filter(time == 5) %>%
+  select(Age, race, risk_behav, peer_drug_use, discrimination, multiple) %>%
+  tbl_summary() %>%
+  bold_labels()
+
+descriptive_table1 <- tbl_merge(
+  list(demo_table1, demo_table2, demo_table3, demo_table4, demo_table5),
+  tab_spanner = c("**Wave 1**", "**Wave 2**", "**Wave 3**", "**Wave 4**", "**Wave 5**"))
+
+#save
+descriptive_table1 %>%
+  as_gt() %>%
+  gt::gtsave(filename = "descriptive_table1.png")
+```
+
+
+
+
+
 ##b. Describe the growth in your outcome 
 ```{r}
 set.seed(0)
@@ -213,3 +262,46 @@ OLS_plot<- ggplot(data = sample.filtered, aes(x = time_c, y = risk_behav)) +
 
 ```
 
+## c.	What are the sample means of the estimated intercepts and slopes?
+### i. What are the sample means of the estimated intercepts and slopes? 
+
+```{r}
+l.filtered$risk_behav <- as.numeric(as.character(l.filtered$risk_behav))
+l.filtered$time_c <- as.numeric(l.filtered$time_c)
+
+
+l.filtered$time_c <- l.filtered$time - min(l.filtered$time)
+models <- l.filtered %>% 
+  group_by(PID) %>% 
+  filter(all(!is.na(risk_behav), !is.na(time_c))) %>%
+  do(model = lm(risk_behav ~ time_c, data = .))
+
+models[[2]][[1]]
+
+intercept <- slope <- NULL
+
+for(i in 1:nrow(models)){
+  intercept[i] <- models[[2]][[i]][["coefficients"]][1]
+  slope[i] <- models[[2]][[i]][["coefficients"]][2]
+}
+
+
+
+```
+
+###ii. What are the sample variances (i.e., standard deviations) of the estimated intercepts and slopes? 
+```{r}
+summary(intercept)
+var(intercept)
+sd(intercept)
+
+summary(slope)
+var(slope)
+sd(slope)
+```
+
+
+###iii. What is the correlation between the estimated intercepts and slopes (i.e., covariance)? 
+```{r}
+cor(intercept, slope)
+```
