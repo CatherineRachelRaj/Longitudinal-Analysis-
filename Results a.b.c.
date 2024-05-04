@@ -1,6 +1,6 @@
 ##a. descriptive
 ```{r}
-l.filtered$time <- as.factor(l.filtered$time)
+
 l.filtered$risk_behav <- as.factor(l.filtered$risk_behav)
 l.filtered$peer_drug_use <- as.factor(l.filtered$peer_drug_use)
 l.filtered$discrimination <- as.factor(l.filtered$discrimination)
