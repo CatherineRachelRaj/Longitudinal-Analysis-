@@ -1,3 +1,5 @@
+#THESE ARE ALTERATE MODELS WE CAN CONSIDER INCASE WE WANT TO DROP RISK BEHAVIORS AS THE OUTCOME DUE TO COLLINEARITY ISSUE IN RANDOM EFFECTS
+
 ```{r with discrimination as the outcome}
 #### Continuous outcome
 ###unconditional growth model
