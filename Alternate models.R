@@ -16,7 +16,7 @@ c.iv2=lmer(discrimination ~ multiple*wave + race*wave + race*multiple+ (wave | P
 summary(c.iv2) 
 icc(c.iv2)# no warning about singularity 
 ``
-
+ 
 ```{r with polysubstance use as the outcome} 
 #### Binary outcome
 ###unconditional growth model
