@@ -52,7 +52,8 @@ logLik(uc.mean)
 icc(uc.mean)
 
 #unconditional growth model
-uc.growth=lmer(risk_behav~ time + (time | PID), data = l.filtered, REML = FALSE)
+l.filtered$wave <- l.filtered$time - 1
+uc.growth=lmer(multiple ~ wave + (wave | PID), data = l.filtered, REML = FALSE)
 summary(uc.growth)
 
 # AIC
