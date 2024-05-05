@@ -7,12 +7,12 @@ summary(uc.growth)
 icc(uc.growth)# no warning about singularity 
 
 ### conditional growth model with main IV polysubstance use only
-c.iv1=lmer(discrimination ~ multiple*wave + (wave | PID), data = l.filtered, REML = FALSE)
+c.iv1=lmer(discrimination ~ as.factor(multiple)*wave + (wave | PID), data = l.filtered, REML = FALSE)
 summary(c.iv1) 
 icc(c.iv1)# no warning about singularity 
 
 ###conditional growth with main IV and additional time varying predictor
-c.iv2=lmer(discrimination ~ multiple*wave + race*wave + race*multiple+ (wave | PID), data = l.filtered, REML = FALSE)
+c.iv2=lmer(discrimination ~ as.factor(multiple)*wave + race*wave + race*as.factor(multiple)+ (wave | PID), data = l.filtered, REML = FALSE)
 summary(c.iv2) 
 icc(c.iv2)# no warning about singularity 
 ``
