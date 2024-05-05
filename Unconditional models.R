@@ -1,4 +1,4 @@
-Multi-level model:
+Multi-level model: 
 
 Level 1 model: Level 1 model describes within person change i.e change in person over time. For outcome Risky Behavior, level 1 model is:
 
