@@ -48,11 +48,11 @@ icc(c.iv2)# no warning about singularity
 
 ###conditional growth with main IV and additional time varying predictor
 c.iv3=lmer(peer_drug_use ~ discrimination*wave 
-                           + race*wave 
-                           + education_head*wave
-                           + race*discrimination 
-                           + race*education_head
-                           + discrimination*education_head
+                           + as.factor(race)*wave 
+                           + as.factor(education_head)*wave
+                           + as.factor(race)*discrimination 
+                           + as.factor(race)*as.factor(education_head)
+                           + discrimination*as.factor(education_head)
                            + (wave | PID), data = l.filtered, REML = FALSE)
 summary(c.iv3) 
 # AIC
