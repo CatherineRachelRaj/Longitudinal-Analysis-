@@ -37,7 +37,7 @@ library(lme4)
 ```
 ```{r unconditional models}
 #unconditional mean model
-uc.mean=lmer(risk_behav ~ 1 + (1 |PID), data = l.filtered,REML = FALSE)
+uc.mean=lmer(peer_drug_use ~ 1 + (1 |PID), data = l.filtered,REML = FALSE)
 summary(uc.mean)
 
 # AIC
@@ -53,7 +53,7 @@ icc(uc.mean)
 
 #unconditional growth model
 l.filtered$wave <- l.filtered$time - 1
-uc.growth=lmer(multiple ~ wave + (wave | PID), data = l.filtered, REML = FALSE)
+uc.growth=lmer(peer_drug_use ~ wave + (wave | PID), data = l.filtered, REML = FALSE)
 summary(uc.growth)
 
 # AIC
