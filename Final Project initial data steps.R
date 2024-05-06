@@ -234,8 +234,8 @@ freq[[5]] #for wave 5
 
 l.filtered = l.final %>% 
               group_by(PID) %>%
-              filter(sum(!is.na(risk_behav)) >= 2 
-                     &sum(!is.na(multiple)) >= 2 
+              filter(sum(!is.na(peer_drug_use)) >= 2 
+                     &sum(!is.na(discrimination)) >= 2 
                      &sum(!is.na(race)) >= 2 
                      &sum(!is.na(education_head)) >= 2)
 ```
