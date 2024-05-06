@@ -1,4 +1,4 @@
-```{r with peer_drug_use as the outcome}
+```{r with peer_drug_use as the outcome} 
 #### Continuous outcome - peer_drug_use used for high-risk social ties
 ###unconditional growth model
 l.filtered$wave <- l.filtered$time - 1
