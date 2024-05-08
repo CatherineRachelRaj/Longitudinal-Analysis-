@@ -183,4 +183,60 @@ p3 + theme(
   axis.title.y = element_text(size = 12, face="bold")   # Increase font size for y-axis label
 )
 
+
+#for education_head= <=High School/GED controlling for race
+ed0dis1=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels
+ed0dis2=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[2]]+fixedef.iv2[[15]]*age.levels
+ed0dis3=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[3]]+fixedef.iv2[[16]]*age.levels
+ed0dis4=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[4]]+fixedef.iv2[[17]]*age.levels
+ed0dis5=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[5]]+fixedef.iv2[[18]]*age.levels
+ed0dis6=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[6]]+fixedef.iv2[[19]]*age.levels
+
+#for education_head= Some College controlling for race
+ed1dis1=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels++fixedef.iv2[[12]]
+ed1dis2=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[2]]+fixedef.iv2[[15]]*age.levels+fixedef.iv2[[12]]
+ed1dis3=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[3]]+fixedef.iv2[[16]]*age.levels+fixedef.iv2[[12]]
+ed1dis4=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[4]]+fixedef.iv2[[17]]*age.levels+fixedef.iv2[[12]]
+ed1dis5=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[5]]+fixedef.iv2[[18]]*age.levels+fixedef.iv2[[12]]
+ed1dis6=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[6]]+fixedef.iv2[[19]]*age.levels+fixedef.iv2[[12]]
+
+#for education_head= 4 -year College controlling for race
+ed2dis1=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels++fixedef.iv2[[13]]
+ed2dis2=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[2]]+fixedef.iv2[[15]]*age.levels+fixedef.iv2[[13]]
+ed2dis3=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[3]]+fixedef.iv2[[16]]*age.levels+fixedef.iv2[[13]]
+ed2dis4=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[4]]+fixedef.iv2[[17]]*age.levels+fixedef.iv2[[13]]
+ed2dis5=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[5]]+fixedef.iv2[[18]]*age.levels+fixedef.iv2[[13]]
+ed2dis6=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[6]]+fixedef.iv2[[19]]*age.levels+fixedef.iv2[[13]]
+
+#for education_head= Any Post-Graduate work controlling for race
+ed3dis1=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels++fixedef.iv2[[14]]
+ed3dis2=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[2]]+fixedef.iv2[[15]]*age.levels+fixedef.iv2[[14]]
+ed3dis3=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[3]]+fixedef.iv2[[16]]*age.levels+fixedef.iv2[[14]]
+ed3dis4=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[4]]+fixedef.iv2[[17]]*age.levels+fixedef.iv2[[14]]
+ed3dis5=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[5]]+fixedef.iv2[[18]]*age.levels+fixedef.iv2[[14]]
+ed3dis6=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[6]]+fixedef.iv2[[19]]*age.levels+fixedef.iv2[[14]]
+
+ed_labels=c("<=High School", "Some College", "4 year College Degree", "Any Post Graduate")
+
+ed_model= data.frame(Age=rep(age.levels, times=24),
+                     Social_ties=c(ed0dis1,ed0dis2,ed0dis3,ed0dis4,ed0dis5,ed0dis6,
+                                   ed1dis1,ed1dis2,ed1dis3,ed1dis4,ed1dis5,ed1dis6,
+                                   ed2dis1,ed2dis2,ed2dis3,ed2dis4,ed2dis5,ed2dis6,
+                                   ed3dis1,ed3dis2,ed3dis3,ed3dis4,ed3dis5,ed3dis6),
+                     Discrimination=rep(1:6, each=5),
+                     Education=rep(ed_labels, each=30))
+ed_model$Discrimination=as.factor(ed_model$Discrimination)
+
+p4=ggplot(data = ed_model) +
+  geom_line(aes(x = Age, y = Social_ties, col = Discrimination)) +
+  facet_wrap(~Education)+ggtitle("Growth plot of High-Risk Social Ties for each score of Discrimination \n for Different Levels of Education of Household Head \n (controlling for Race)")+
+  theme_classic()+
+  labs(y="High-Risk Social Ties")
+  
+p4 + theme(
+  plot.title = element_text(hjust = 0.5, face = "bold", size = 15),  # Center, bold, and increase title font size
+  axis.title.x = element_text(size = 12, face="bold"),  # Increase font size for x-axis label
+  axis.title.y = element_text(size = 12, face="bold")   # Increase font size for y-axis label
+)
+
 ```
