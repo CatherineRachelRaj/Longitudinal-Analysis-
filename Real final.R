@@ -154,11 +154,11 @@ r3dis6=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[6]]+fixedef.iv2
 
 #for race=Non-Hispanic Other
 r4dis1=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[12]]
-r4dis2=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[2]]+fixedef.iv2[[15]]*age.levels+fixedef.iv2[[12]]
-r4dis3=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[3]]+fixedef.iv2[[16]]*age.levels+fixedef.iv2[[12]]
-r4dis4=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[4]]+fixedef.iv2[[17]]*age.levels+fixedef.iv2[[12]]
-r4dis5=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[5]]+fixedef.iv2[[18]]*age.levels+fixedef.iv2[[12]]
-r4dis6=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[6]]+fixedef.iv2[[19]]*age.levels+fixedef.iv2[[12]]
+r4dis2=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[2]]+fixedef.iv2[[15]]*age.levels+fixedef.iv2[[11]]
+r4dis3=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[3]]+fixedef.iv2[[16]]*age.levels+fixedef.iv2[[11]]
+r4dis4=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[4]]+fixedef.iv2[[17]]*age.levels+fixedef.iv2[[11]]
+r4dis5=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[5]]+fixedef.iv2[[18]]*age.levels+fixedef.iv2[[11]]
+r4dis6=fixedef.iv2[[1]]+fixedef.iv2[[7]]*age.levels+fixedef.iv2[[6]]+fixedef.iv2[[19]]*age.levels+fixedef.iv2[[11]]
 
 race_labels=c("Hispanic", "Non-Hispanic White","Non-Hispanic Black", "Non-Hispanic Asian", "Non-Hispanic Other")
 race_model=data.frame(Age=rep(age.levels, times=30),
