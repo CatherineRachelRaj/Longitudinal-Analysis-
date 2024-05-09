@@ -546,7 +546,38 @@ OLS_plot<- ggplot(data = drop_na(l.filtered, peer_drug_use), aes(x = time_age, y
 OLS_plot
 ```
 
+####race
+```{r}
+# race stratification
+race_plot <- ggplot(data = drop_na(l.filtered, race, peer_drug_use), aes(x = time_age, y = peer_drug_use)) +
+  geom_smooth(aes(group = as.factor(PID)), method = "lm",
+              color = "black", se = FALSE) +
+  geom_smooth(method = "lm", color = "red", se = FALSE) + 
+  facet_grid(~ race)
 
+```
+
+####discrimination
+```{r}
+# discrimination stratification
+dis_plot <- ggplot(data = drop_na(l.filtered, discrimination, peer_drug_use), aes(x = time_age, y = peer_drug_use)) +
+  geom_smooth(aes(group = as.factor(PID)), method = "lm",
+              color = "black", se = FALSE) +
+  geom_smooth(method = "lm", color = "red", se = FALSE) + 
+  facet_grid(~ discrimination)
+dis_plot
+```
+
+####edc
+```{r}
+# edc stratification
+edc_plot <- ggplot(data = drop_na(l.filtered, education_head, peer_drug_use), aes(x = time_age, y = peer_drug_use)) +
+  geom_smooth(aes(group = as.factor(PID)), method = "lm",
+              color = "black", se = FALSE) +
+  geom_smooth(method = "lm", color = "red", se = FALSE) + 
+  facet_grid(~ education_head)
+edc_plot
+```
 
 
 -----------------------------------------------
