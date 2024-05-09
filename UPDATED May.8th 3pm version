@@ -102,7 +102,7 @@ l.final <- final %>%
   pivot_longer(cols = c("TA111020", "TA131055", "TA151095", "TA171928", "TA192089"), 
                values_to = "peer_drug_use", names_to = "peer_col") %>% 
   mutate(baseage = mean(ER34104[ER34104 > 0]),
-         age = case_when(
+         meanage = case_when(
            peer_col == "TA111020" ~ baseage + 0,
            peer_col == "TA131055" ~ baseage + 2,
            peer_col == "TA151095" ~ baseage + 4,
@@ -110,20 +110,24 @@ l.final <- final %>%
            peer_col == "TA192089" ~ baseage + 8
          ),
          time_age = case_when(
-           age == baseage + 0 ~ 1,
-           age == baseage + 2 ~ 2,
-           age == baseage + 4 ~ 3,
-           age == baseage + 6 ~ 4,
-           age == baseage + 8 ~ 5
+           meanage == baseage + 0 ~ 1,
+           meanage == baseage + 2 ~ 2,
+           meanage == baseage + 4 ~ 3,
+           meanage == baseage + 6 ~ 4,
+           meanage == baseage + 8 ~ 5
          )) %>% 
-  select(PID, age, peer_drug_use, time_age)
+  select(PID, meanage, peer_drug_use, time_age)
 
 # Recode peer_drug_use values of 8 and 9 with NA
 l.final$peer_drug_use[l.final$peer_drug_use %in% c(8, 9)] <- NA
 
 
-
-
+Age <- final %>% 
+  pivot_longer(., cols = c("ER34104", "ER34204", "ER34305", "ER34504", "ER34704"), 
+               values_to = "Age", names_to = "age_col") %>%
+   pull(Age)
+Age[Age == 0] <- NA
+l.final$Age = Age
 
 # cocaine= final%>%
 #   pivot_longer(., cols= c("TA110940","TA130973", "TA150995","TA171836","TA191998"), values_to = "cocaine", names_to = "coc_col") %>%
@@ -315,28 +319,33 @@ l.filtered %>%
   select(-PID)
 demo_table1 <- l.filtered %>%
   filter(time_age == 1) %>%
-  select(sex, race, education_head, peer_drug_use, discrimination) %>%
-  tbl_summary() %>%
+  select(Age, sex, race, education_head, peer_drug_use, discrimination) %>%
+  tbl_summary(statistic = Age ~ "{mean} ({min}, {max})"
+  ) %>%
   bold_labels()
 demo_table2 <- l.filtered %>%
   filter(time_age == 2) %>%
-  select(sex, race, education_head, peer_drug_use, discrimination) %>%
-  tbl_summary() %>%
+  select(Age, sex, race, education_head, peer_drug_use, discrimination) %>%
+  tbl_summary(statistic =  Age ~ "{mean} ({min}, {max})"
+  ) %>%
   bold_labels()
 demo_table3 <- l.filtered %>%
   filter(time_age == 3) %>%
-  select(sex, race, education_head, peer_drug_use, discrimination) %>%
-  tbl_summary() %>%
+  select(Age, sex, race, education_head, peer_drug_use, discrimination) %>%
+  tbl_summary(statistic =  Age ~ "{mean} ({min}, {max})"
+  ) %>%
   bold_labels()
 demo_table4 <- l.filtered %>%
   filter(time_age == 4) %>%
-  select(sex, race, education_head, peer_drug_use, discrimination) %>%
-  tbl_summary() %>%
+  select(Age, sex, race, education_head, peer_drug_use, discrimination) %>%
+  tbl_summary(statistic =  Age ~ "{mean} ({min}, {max})"
+  ) %>%
   bold_labels()
 demo_table5 <- l.filtered %>%
   filter(time_age == 5) %>%
-  select(sex, race, education_head,peer_drug_use, discrimination) %>%
-  tbl_summary() %>%
+  select(Age, sex, race, education_head,peer_drug_use, discrimination) %>%
+  tbl_summary(statistic =  Age ~ "{mean} ({min}, {max})"
+  ) %>%
   bold_labels()
 
 descriptive_table1 <- tbl_merge(
@@ -354,7 +363,7 @@ descriptive_table1 %>%
 ##b. Describe the growth in your outcome 
 ```{r}
 set.seed(0)
-sample <- final[sample(4615, size = 60), ]
+sample <- final[sample(4615, size = 80), ]
 ```
 
 
@@ -386,7 +395,12 @@ l.sample <- sample %>%
 l.sample$peer_drug_use[l.sample$peer_drug_use %in% c(8, 9)] <- NA
 
 
-
+Age <- sample %>% 
+  pivot_longer(., cols = c("ER34104", "ER34204", "ER34305", "ER34504", "ER34704"), 
+               values_to = "Age", names_to = "age_col") %>%
+   pull(Age)
+Age[Age == 0] <- NA
+l.sample$Age = Age
 
 discrimination = sample %>%
   pivot_longer(., cols = c("TA111130", "TA131222", "TA151282", "TA171977", "TA192156"), 
