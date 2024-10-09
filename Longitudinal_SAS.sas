@@ -1,3 +1,12 @@
+/***************************************************************
+PURPOSE: 
+
+DATA SOURCE:
+
+AUTHOR: 
+CATHERINE RACHEL
+****************************************************************/
+
 /* Set the working library */
 libname proj "C:\Users\liangqiran\Desktop\longitudinal\finalproj";
 
